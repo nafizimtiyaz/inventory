@@ -1,0 +1,118 @@
+﻿{% extends 'main.html' %}
+{% block body %}
+{% load static %}
+    <div class="content-page">
+     <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="d-flex flex-wrap flex-wrap align-items-center justify-content-between mb-4">
+                    <div>
+                        <h4 class="mb-3">Product List</h4>
+                        <p class="mb-0">The product list effectively dictates product presentation and provides space<br> to list your products and offering in the most appealing way.</p>
+                    </div>
+                    <a href="add-product.html" class="btn btn-primary add-list"><i class="las la-plus mr-3"></i>Add Product</a>
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="table-responsive rounded mb-3">
+                <table class="data-table table mb-0 tbl-server-info">
+                    <thead class="bg-white text-uppercase">
+<!--                        <tr class="ligth ligth-data">-->
+<!--                            <th>-->
+<!--                                <div class="checkbox d-inline-block">-->
+<!--                                    <input type="checkbox" class="checkbox-input" id="checkbox1">-->
+<!--                                    <label for="checkbox1" class="mb-0"></label>-->
+<!--                                </div>-->
+<!--                            </th>-->
+<!--                           <tr>-->
+                              <th scope="col">Product</th>
+                              <th scope="col">Price</th>
+                              <th scope="col">Selling Price</th>
+                              <th scope="col">Available</th>
+                              <th scope="col">Supplier</th>
+                              <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody class="ligth-body">
+                        {% for p in products %}
+    <tr>
+      <td>{{p.name}}</td>
+        <td>{{p.cost}} TK/ps</td>
+      <td>{{p.selling_price}} TK/ps</td>
+      <td>{{p.qty}}</td>
+      <td>{{p.supplier}}</td>
+<!--      <td> <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal1">-->
+<!--  ADD Quantitiy-->
+<!--</button></td>-->
+<!--      <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">-->
+<!--  Delete-->
+<!--</button></td>-->
+<!--      <td><button  class="btn btn-primary"> <a href="/edit/{{p.id}}/">Edit</a></button></td>-->
+        <td>
+            <div class="d-flex align-items-center list-action">
+                <button type="button" class="badge badge-info mr-2"data-toggle="modal" data-target="#exampleModal1"><i class="ri-add-line mr-0"></i></button>
+                <a class="badge bg-success mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit" href="/edit/{{p.id}}/"><i class="ri-pencil-line mr-0"></i></a>
+                <button type="button" class="badge bg-warning mr-2" data-toggle="modal" data-target="#exampleModal"><i class="ri-delete-bin-line mr-0"></i></button>
+            </div>
+        </td>
+<!-- Modal -->
+<div class="modal fade"  id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog  modal-dialog-centered">
+    <div class="modal-content" style="background:none; border: 2px solid green;">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">DELETE</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" >
+       Are You Sure to delete {{p.name}}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary"><a href="{% url 'home:delete' id=p.id %}">Delete</a></button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal -->
+<div class="modal fade"  id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog  modal-dialog-centered">
+    <div class="modal-content" style="background:none; border: 2px solid green;">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">ADD Available Quantitiy</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" >
+       <form method="post" action="/add/{{p.id}}/" enctype="multipart/form-data" >
+            {% csrf_token %}
+            <fieldset class="form-group mx-auto">
+                <legend class="border-bottom text-center mb-4"><h2>Add Quantitiy in {{p.name}}</h2></legend>
+                <input type="text" name="qty">
+            </fieldset>
+            <button class="btn btn-outline-info " type="submit" value="submit">Add</button>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+      {% comment %} <td><a href="{% url 'home:delete' pk=p.id %}">Delete</a></td> {% endcomment %}
+    </tr>
+    {% endfor %}
+                        
+                    </tbody>
+                </table>
+                </div>
+            </div>
+        </div>
+        <!-- Page end  -->
+    </div>
+      </div>
+    </div>
+    <!-- Wrapper End-->
+{% endblock body %}
