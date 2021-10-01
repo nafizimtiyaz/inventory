@@ -1,1 +1,1 @@
-web:gunicorn medicalStore.wsgi
+web: gunicorn medicalStore.wsgi
