@@ -66,7 +66,7 @@ def handleLogin(request):
             messages.error(request, "Invalid username or password.")
     form = AuthenticationForm()
     return render(request=request,
-                  template_name="home/login.html",
+                  template_name="home/index.html",
                   context={"form": form})
 
 @login_required()
