@@ -11,7 +11,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '1lo2u9hcn=io(yah0-2!rk6y&z_5ii9kr()05k$a&akg@kptqa'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['m2rsoft-inventory.herokuapp.com']
 
