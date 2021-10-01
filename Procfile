@@ -1,1 +1,1 @@
-web:gunicorn DesireBD.wsgi
+web:gunicorn medicalStore.wsgi
